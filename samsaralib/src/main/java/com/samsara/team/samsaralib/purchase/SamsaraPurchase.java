@@ -87,13 +87,13 @@ public abstract class SamsaraPurchase {
         return skuDetails;
     }
 
-    private ArrayList<Product> getMart (ArrayList<String> responseList, ArrayList<Product> mart) {
+    private ArrayList<SamsaraProduct> getMart (ArrayList<String> responseList, ArrayList<SamsaraProduct> mart) {
         Log.d(TAG, "getMart");
 
         for (String thisResponse : responseList) {
             try {
                 JSONObject object = new JSONObject(thisResponse);
-                mart.add(new Product(
+                mart.add(new SamsaraProduct(
                         object.getString(JSON_PRODUCT_ID),
                         object.getString(JSON_PRICE),
                         object.getString(JSON_PRICE_CURRENCY_CODE),
@@ -103,7 +103,7 @@ public abstract class SamsaraPurchase {
                         object.getString(JSON_DESCRIPTION)));
             } catch (JSONException e) {
                 e.printStackTrace();
-                return new ArrayList<Product>();
+                return new ArrayList<SamsaraProduct>();
             }
         }
         return mart;

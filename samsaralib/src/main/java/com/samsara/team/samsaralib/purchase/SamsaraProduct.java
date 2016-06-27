@@ -3,7 +3,7 @@ package com.samsara.team.samsaralib.purchase;
 /**
  * Created by pborisenko on 6/26/2016.
  */
-public class Product {
+public class SamsaraProduct {
 
     private static final String TAG = "Product";
 
@@ -18,13 +18,13 @@ public class Product {
     public double price_numeric;
     public double price_micros_numeric;
 
-    public Product (String i_productId,
-                    String i_price,
-                    String i_price_currency_code,
-                    String i_price_amount_micros,
-                    String i_type,
-                    String i_title,
-                    String i_description) {
+    public SamsaraProduct(String i_productId,
+                          String i_price,
+                          String i_price_currency_code,
+                          String i_price_amount_micros,
+                          String i_type,
+                          String i_title,
+                          String i_description) {
         productId = i_productId;
         price = i_price;
         price_currency_code = i_price_currency_code;
