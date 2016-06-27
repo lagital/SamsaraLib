@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/SamsaraLib.iml" filepath="$PROJECT_DIR$/SamsaraLib.iml" />
-      <module fileurl="file://$PROJECT_DIR$/lib/lib.iml" filepath="$PROJECT_DIR$/lib/lib.iml" />
       <module fileurl="file://$PROJECT_DIR$/samsaralib/samsaralib.iml" filepath="$PROJECT_DIR$/samsaralib/samsaralib.iml" />
     </modules>
   </component>
