@@ -20,7 +20,7 @@ import java.util.Random;
 /**
  * Created by pborisenko on 6/26/2016.
  */
-public abstract class SamsaraPurchase {
+public class SamsaraPurchase {
 
     private static final String TAG = "SamsaraPurchase";
 
@@ -38,7 +38,7 @@ public abstract class SamsaraPurchase {
     private static final String DEVELOPER_PAYLOAD_TEMPLATE
             = "abcdefghijklmnopqrstuvwxyz1234567890/+-()&#@%!";
 
-    public static String generateDeveloperPayload(Random rng, String characters, int length)
+    private static String generateDeveloperPayload(Random rng, String characters, int length)
     {
         char[] text = new char[length];
         for (int i = 0; i < length; i++)
@@ -48,7 +48,7 @@ public abstract class SamsaraPurchase {
         return new String(text);
     }
 
-    public static boolean makePurchase (Activity activity, String sku, IInAppBillingService service,
+    public static String makePurchase (Activity activity, String sku, IInAppBillingService service,
                                         Integer requestCode) {
         Log.d(TAG, "makePurchase");
 
@@ -61,16 +61,15 @@ public abstract class SamsaraPurchase {
                     sku, "inapp", developerPayloadString);
             PendingIntent pendingIntent = buyIntentBundle.getParcelable("BUY_INTENT");
             activity.startIntentSenderForResult(pendingIntent.getIntentSender(),
-                    requestCode, new Intent(), Integer.valueOf(0), Integer.valueOf(0),
-                    Integer.valueOf(0));
-            return true;
+                    requestCode, new Intent(), 0, 0, 0);
+            return developerPayloadString;
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
+            return null;
         }
     }
 
-    private Bundle getSkuDetails (Context context, Bundle skuDetails, ArrayList<String> skuList,
+    public static Bundle getSkuDetails (Context context, Bundle skuDetails, ArrayList<String> skuList,
                                   IInAppBillingService service) {
         Log.d(TAG, "getSkuDetails");
 
@@ -82,12 +81,12 @@ public abstract class SamsaraPurchase {
                     context.getPackageName(), "inapp", querySkus);
         } catch (RemoteException e) {
             e.printStackTrace();
-            return new Bundle();
+            return null;
         }
         return skuDetails;
     }
 
-    private ArrayList<SamsaraProduct> getMart (ArrayList<String> responseList, ArrayList<SamsaraProduct> mart) {
+    public static ArrayList<SamsaraProduct> getMart (ArrayList<String> responseList, ArrayList<SamsaraProduct> mart) {
         Log.d(TAG, "getMart");
 
         for (String thisResponse : responseList) {
@@ -103,42 +102,16 @@ public abstract class SamsaraPurchase {
                         object.getString(JSON_DESCRIPTION)));
             } catch (JSONException e) {
                 e.printStackTrace();
-                return new ArrayList<SamsaraProduct>();
+                return null;
             }
         }
         return mart;
     }
 
-    public void consumePurchase (Context context, String token, IInAppBillingService service) {
+    public static void consumePurchase (Context context, String token, IInAppBillingService service) {
         Log.d(TAG, "consumePurchase");
 
         ConsumeTask consumeTask = new ConsumeTask(context, token, service);
         consumeTask.execute();
-    }
-
-    private class ConsumeTask extends AsyncTask<Void,Void,Void> {
-        private static final String TAG = "ConsumeTask";
-
-        private Context mContext;
-        private String mToken;
-        private IInAppBillingService mService;
-
-        ConsumeTask (Context context, String token, IInAppBillingService service) {
-            mToken = token;
-            mService = service;
-            mContext = context;
-        }
-
-        @Override
-        protected Void doInBackground(Void... arg0) {
-            Log.d(TAG, "doInBackground");
-
-            try {
-                int response = mService.consumePurchase(3, mContext.getPackageName(), mToken);
-            } catch (RemoteException e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
     }
 }

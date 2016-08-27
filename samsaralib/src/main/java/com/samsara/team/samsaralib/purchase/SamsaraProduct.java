@@ -5,7 +5,7 @@ package com.samsara.team.samsaralib.purchase;
  */
 public class SamsaraProduct {
 
-    private static final String TAG = "Product";
+    private static final String TAG = "SamsaraProduct";
 
     public String productId;
     public String price;
