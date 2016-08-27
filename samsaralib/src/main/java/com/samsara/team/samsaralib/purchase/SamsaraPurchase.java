@@ -88,8 +88,9 @@ public class SamsaraPurchase {
         return skuDetails;
     }
 
-    public static Bundle getMart (ArrayList<String> responseList, ArrayList<SamsaraProduct> mart) {
+    public static Bundle getMart (ArrayList<String> responseList) {
         Log.d(TAG, "getMart");
+        ArrayList<SamsaraProduct> mart = new ArrayList<>();
 
         for (String thisResponse : responseList) {
             try {
