@@ -1,11 +1,15 @@
 package com.samsara.team.samsaralib.purchase;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by pborisenko on 6/26/2016.
  */
-public class SamsaraProduct {
+public class SamsaraProduct implements Parcelable{
 
     private static final String TAG = "SamsaraProduct";
+    private static Parcelable.Creator<SamsaraProduct> CREATOR;
 
     public String productId;
     public String price;
@@ -37,4 +41,12 @@ public class SamsaraProduct {
         price_micros_numeric = Double.parseDouble(price_amount_micros);
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+    }
 }

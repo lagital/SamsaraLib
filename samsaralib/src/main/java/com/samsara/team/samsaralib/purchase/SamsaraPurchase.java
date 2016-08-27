@@ -35,6 +35,8 @@ public class SamsaraPurchase {
     public static final String JSON_TITLE               = "title";
     public static final String JSON_DESCRIPTION         = "description";
 
+    public static final String MART_LIST                = "MART_LIST";
+
     private static final String DEVELOPER_PAYLOAD_TEMPLATE
             = "abcdefghijklmnopqrstuvwxyz1234567890/+-()&#@%!";
 
@@ -86,7 +88,7 @@ public class SamsaraPurchase {
         return skuDetails;
     }
 
-    public static ArrayList<SamsaraProduct> getMart (ArrayList<String> responseList, ArrayList<SamsaraProduct> mart) {
+    public static Bundle getMart (ArrayList<String> responseList, ArrayList<SamsaraProduct> mart) {
         Log.d(TAG, "getMart");
 
         for (String thisResponse : responseList) {
@@ -105,7 +107,11 @@ public class SamsaraPurchase {
                 return null;
             }
         }
-        return mart;
+
+        Bundle b = new Bundle();
+        b.putParcelableArrayList(MART_LIST, mart);
+
+        return b;
     }
 
     public static void consumePurchase (Context context, String token, IInAppBillingService service) {
