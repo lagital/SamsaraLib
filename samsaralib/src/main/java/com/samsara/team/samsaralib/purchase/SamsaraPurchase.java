@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.util.Log;
@@ -34,6 +33,7 @@ public class SamsaraPurchase {
     public static final String JSON_TYPE                = "type";
     public static final String JSON_TITLE               = "title";
     public static final String JSON_DESCRIPTION         = "description";
+    public static final String JSON_DEV_PAYLOAD         = "developerPayload";
 
     public static final String MART_LIST                = "MART_LIST";
 
@@ -113,6 +113,22 @@ public class SamsaraPurchase {
         b.putParcelableArrayList(MART_LIST, mart);
 
         return b;
+    }
+
+    public static Boolean validatePurchase (JSONObject purchaseData, Integer result_code,
+                                            String developerPayload, String dataSignature){
+        try {
+            if (result_code != Activity.RESULT_OK) {
+                return false;
+            }
+            if (developerPayload == null || !developerPayload.equals(purchaseData.getString(JSON_DEV_PAYLOAD))) {
+                return false;
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 
     public static void consumePurchase (Context context, String token, IInAppBillingService service) {
