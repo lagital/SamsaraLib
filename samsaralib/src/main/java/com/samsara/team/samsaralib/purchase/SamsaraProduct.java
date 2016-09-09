@@ -11,16 +11,16 @@ public class SamsaraProduct implements Parcelable{
     private static final String TAG = "SamsaraProduct";
     private static Parcelable.Creator<SamsaraProduct> CREATOR;
 
-    public String productId;
-    public String price;
-    public String price_currency_code;
-    public String price_amount_micros;
-    public String type;
-    public String title;
-    public String description;
+    private String ProductId;
+    private String Price;
+    private String PriceCurrencyCode;
+    private String PriceAmountMicros;
+    private String Type;
+    private String Title;
+    private String Description;
 
-    public double price_numeric;
-    public double price_micros_numeric;
+    private double PriceNumeric;
+    private double PriceMicrosNumeric;
 
     public SamsaraProduct(String i_productId,
                           String i_price,
@@ -29,16 +29,16 @@ public class SamsaraProduct implements Parcelable{
                           String i_type,
                           String i_title,
                           String i_description) {
-        productId = i_productId;
-        price = i_price;
-        price_currency_code = i_price_currency_code;
-        price_amount_micros = i_price_amount_micros;
-        type = i_type;
-        title = i_title;
-        description = i_description;
+        ProductId = i_productId;
+        Price = i_price;
+        PriceCurrencyCode = i_price_currency_code;
+        PriceAmountMicros = i_price_amount_micros;
+        Type = i_type;
+        Title = i_title;
+        Description = i_description;
 
-        price_numeric = Double.parseDouble(price);
-        price_micros_numeric = Double.parseDouble(price_amount_micros);
+        PriceNumeric = Double.parseDouble(Price);
+        PriceMicrosNumeric = Double.parseDouble(PriceAmountMicros);
     }
 
     @Override
@@ -48,5 +48,77 @@ public class SamsaraProduct implements Parcelable{
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+    }
+
+    public String getProductId() {
+        return ProductId;
+    }
+
+    public void setProductId(String productId) {
+        ProductId = productId;
+    }
+
+    public String getPrice() {
+        return Price;
+    }
+
+    public void setPrice(String price) {
+        Price = price;
+    }
+
+    public String getPriceCurrencyCode() {
+        return PriceCurrencyCode;
+    }
+
+    public void setPriceCurrencyCode(String priceCurrencyCode) {
+        PriceCurrencyCode = priceCurrencyCode;
+    }
+
+    public String getPriceAmountMicros() {
+        return PriceAmountMicros;
+    }
+
+    public void setPriceAmountMicros(String priceAmountMicros) {
+        PriceAmountMicros = priceAmountMicros;
+    }
+
+    public String getType() {
+        return Type;
+    }
+
+    public void setType(String type) {
+        Type = type;
+    }
+
+    public String getTitle() {
+        return Title;
+    }
+
+    public void setTitle(String title) {
+        Title = title;
+    }
+
+    public String getDescription() {
+        return Description;
+    }
+
+    public void setDescription(String description) {
+        Description = description;
+    }
+
+    public double getPriceNumeric() {
+        return PriceNumeric;
+    }
+
+    public void setPriceNumeric(double priceNumeric) {
+        PriceNumeric = priceNumeric;
+    }
+
+    public double getPriceMicrosNumeric() {
+        return PriceMicrosNumeric;
+    }
+
+    public void setPriceMicrosNumeric(double priceMicrosNumeric) {
+        PriceMicrosNumeric = priceMicrosNumeric;
     }
 }
